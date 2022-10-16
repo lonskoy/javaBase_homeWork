@@ -14,9 +14,9 @@ function solveEquation(a, b, c) {
   }
 
   if (d > 0) {
-    root1 = (-b - Math.sqrt(d)/(2*a));
-    root2 = (-b + Math.sqrt(d)/(2*a));
-    arr.push(root1.toFixed(2), root2.toFixed(2));
+    root1 = (-b + Math.sqrt(d)/(2*a));
+    root2 = (-b - Math.sqrt(d)/(2*a));
+    arr.push(root1, root2);
   }
   
   return arr; // array
@@ -33,7 +33,7 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
   let creditTime = yearComparison * 12 - monthToDay + monthCredit; //Вычисление времени кредита в месяцах//
   let creditBody = amount - contribution; //Вычисление тела кредита//
   let percentMonth = percent / 12; //Вычисление процентной ставки за месяц//
-  let totalAmount = creditBody + (((creditBody/100)*percentMonth)*creditTime); // Не понял формулу из примера, написал свою//
+  let totalAmount = creditBody * (percentMonth + (percentMonth / (((1 + percentMonth)**creditTime) - 1)));
 
   return totalAmount.toFixed(2); //За чем то приводим число к двузначному после запятой, хотя оно всегда будет целым...//
 }
